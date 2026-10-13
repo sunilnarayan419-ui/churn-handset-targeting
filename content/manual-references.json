@@ -1,0 +1,48 @@
+[
+  {
+    "id": "url:https://www.businesswire.com/news/home/20260722580890/en/",
+    "type": "webpage",
+    "title": "T-Mobile Delivers Continued Strong Account Growth, Translating into Industry-Leading Service Revenue Growth Driven by Widening Differentiation",
+    "container-title": "Business Wire",
+    "author": [{"literal": "T-Mobile US, Inc."}],
+    "issued": {"date-parts": [[2026, 7, 22]]},
+    "accessed": {"date-parts": [[2026, 10]]},
+    "URL": "https://www.businesswire.com/news/home/20260722580890/en/"
+  },
+  {
+    "id": "url:https://www.customerexperiencedive.com/news/verizon-fight-churn-cx-investments/826174/",
+    "type": "article-newspaper",
+    "title": "Verizon earnings call coverage: churn and customer-experience investments (Q2 2026)",
+    "container-title": "Customer Experience Dive",
+    "issued": {"date-parts": [[2026, 7]]},
+    "accessed": {"date-parts": [[2026, 10]]},
+    "URL": "https://www.customerexperiencedive.com/news/verizon-fight-churn-cx-investments/826174/"
+  },
+  {
+    "id": "url:https://www.nasdaq.com/articles/verizon-communications-q2-earnings-call-highlights",
+    "type": "article-newspaper",
+    "title": "Verizon Communications Q2 Earnings Call Highlights",
+    "container-title": "Nasdaq",
+    "issued": {"date-parts": [[2026, 7]]},
+    "accessed": {"date-parts": [[2026, 10]]},
+    "URL": "https://www.nasdaq.com/articles/verizon-communications-q2-earnings-call-highlights"
+  },
+  {
+    "id": "url:https://thedesk.net/2026/07/att-q2-2026-earnings-report-fiber-buildout/",
+    "type": "article-newspaper",
+    "title": "AT&T Q2 2026 earnings report",
+    "container-title": "The Desk",
+    "issued": {"date-parts": [[2026, 7]]},
+    "accessed": {"date-parts": [[2026, 10]]},
+    "URL": "https://thedesk.net/2026/07/att-q2-2026-earnings-report-fiber-buildout/"
+  },
+  {
+    "id": "url:https://www.phonearena.com/news/at-t-adds-more-postpaid-phone-subscribers-during-q2_id182058",
+    "type": "article-newspaper",
+    "title": "AT&T tops estimates for postpaid phone net adds during Q2",
+    "container-title": "PhoneArena",
+    "issued": {"date-parts": [[2026, 7]]},
+    "accessed": {"date-parts": [[2026, 10]]},
+    "URL": "https://www.phonearena.com/news/at-t-adds-more-postpaid-phone-subscribers-during-q2_id182058"
+  }
+]

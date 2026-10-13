@@ -1,0 +1,37 @@
+name: manuscript
+
+on:
+  push:
+    branches: [main]
+    paths: ["content/**", "reports/**", "scripts/export_manuscript_variables.py", "scripts/check_manuscript.py", "build/**", ".github/workflows/docs.yml"]
+  pull_request:
+    paths: ["content/**", "reports/**", "scripts/export_manuscript_variables.py", "scripts/check_manuscript.py", "build/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install pandoc
+        run: sudo apt-get update && sudo apt-get install -y pandoc
+      - run: pip install -e ".[docs]"
+      - name: Build manuscript (Manubot + pandoc)
+        run: bash build/build.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: manuscript
+          path: output/
+      - name: Publish to GitHub Pages
+        if: github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: output

@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite it as below."
+title: "churn-handset-targeting: a measurement-first retention pilot for a telecom operator"
+type: software
+version: 0.1.0
+date-released: 2026-10-13
+license: MIT
+authors:
+  - name: "SunilMandloi"
+# repository-code: "https://github.com/<your-username>/churn-handset-targeting"

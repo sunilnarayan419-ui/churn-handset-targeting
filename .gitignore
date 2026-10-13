@@ -1,0 +1,19 @@
+# data and models are never committed (assignment data is not redistributable)
+data/raw/*
+!data/raw/.gitkeep
+models/*
+!models/.gitkeep
+.env
+# build output
+output/
+build/variables.json
+ci/cache/
+# python
+__pycache__/
+*.egg-info/
+.venv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+.ipynb_checkpoints/

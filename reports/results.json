@@ -1,0 +1,306 @@
+{
+  "n_customers": 100000,
+  "sample_churn_rate": 0.49562,
+  "eda": {
+    "churn_le300": 0.394532029535023,
+    "n_le300": 40088,
+    "churn_301_400": 0.5932138406977858,
+    "n_301_400": 20866,
+    "chi2_p": 0.0,
+    "cohort_share_of_base": 0.20866,
+    "cohort_share_of_churners": 0.24974779064605948,
+    "tenure_strata": {
+      "<=12 months": {
+        "le300": 0.3703395228063299,
+        "301_400": 0.633061835106383,
+        "gt400": NaN
+      },
+      "13-24 months": {
+        "le300": 0.4546936114732725,
+        "301_400": 0.5580507179957226,
+        "gt400": 0.5390660734334068
+      },
+      ">24 months": {
+        "le300": 0.3615124915597569,
+        "301_400": 0.48426573426573427,
+        "gt400": 0.5604161109629234
+      }
+    },
+    "range_revenue": [
+      0.48472075869336145,
+      0.528848083483845
+    ],
+    "range_usage_change": [
+      0.45612883683360256,
+      0.540352644836272
+    ],
+    "range_care_calls": [
+      0.44145369740549995,
+      0.5176147382029735
+    ],
+    "range_handset_price": [
+      0.410197938520478,
+      0.5746148539894228
+    ],
+    "nyc_customers": 11098,
+    "nyc_share": 0.11098,
+    "nyc_churn": 0.5002703189763922,
+    "columns_with_missing": 43,
+    "max_missing_pct": 49.366,
+    "max_missing_column": "numbcars"
+  },
+  "model": {
+    "name": "Gradient boosting (HistGradientBoostingClassifier)",
+    "n_features": 97,
+    "params": {
+      "learning_rate": 0.03,
+      "max_leaf_nodes": 31,
+      "min_samples_leaf": 100,
+      "l2_regularization": 1.0
+    },
+    "metrics_test": {
+      "roc_auc": 0.6933608238622,
+      "pr_auc": 0.6809212807124099,
+      "accuracy": 0.6364,
+      "precision": 0.6300236406619385,
+      "recall": 0.6452784503631961,
+      "f1": 0.6375598086124402,
+      "brier_raw": 0.22121081981197505,
+      "brier_calibrated": 0.2210964878159065
+    },
+    "auc_ci": [
+      0.6865996045051593,
+      0.7006206369764841
+    ]
+  },
+  "targeting": {
+    "top5": {
+      "contacted": 1000,
+      "churn_rate_in_file": 0.846,
+      "recall": 0.08535108958837773,
+      "false_positive_rate": 0.015265662172878667,
+      "lift_in_file": 1.7070217917675545,
+      "precision_at_base_rate": 0.05345630017137188,
+      "lift_at_base_rate": 5.3456300171371876
+    },
+    "top10": {
+      "contacted": 2000,
+      "churn_rate_in_file": 0.7835,
+      "recall": 0.15809120258272802,
+      "false_positive_rate": 0.042922283901665345,
+      "lift_in_file": 1.58091202582728,
+      "precision_at_base_rate": 0.03586951470550862,
+      "lift_at_base_rate": 3.5869514705508623
+    },
+    "top20": {
+      "contacted": 4000,
+      "churn_rate_in_file": 0.73275,
+      "recall": 0.29570217917675545,
+      "false_positive_rate": 0.1059674861221253,
+      "lift_in_file": 1.4785108958837774,
+      "precision_at_base_rate": 0.02741414145909453,
+      "lift_at_base_rate": 2.7414141459094528
+    },
+    "rule_301_400": {
+      "share_of_base": 0.2094,
+      "churn_rate_in_file": 0.5983763132760267,
+      "recall": 0.2528248587570621,
+      "precision_at_base_rate": 0.015085584941937085,
+      "lift_at_base_rate": 1.5085584941937085
+    }
+  },
+  "deciles": [
+    {
+      "decile": 1,
+      "customers": 2000,
+      "churn_rate": 0.7835,
+      "lift_vs_avg": 1.5809,
+      "cum_recall": 0.1581
+    },
+    {
+      "decile": 2,
+      "customers": 2000,
+      "churn_rate": 0.682,
+      "lift_vs_avg": 1.3761,
+      "cum_recall": 0.2957
+    },
+    {
+      "decile": 3,
+      "customers": 2000,
+      "churn_rate": 0.622,
+      "lift_vs_avg": 1.255,
+      "cum_recall": 0.4212
+    },
+    {
+      "decile": 4,
+      "customers": 2000,
+      "churn_rate": 0.548,
+      "lift_vs_avg": 1.1057,
+      "cum_recall": 0.5318
+    },
+    {
+      "decile": 5,
+      "customers": 2000,
+      "churn_rate": 0.524,
+      "lift_vs_avg": 1.0573,
+      "cum_recall": 0.6375
+    },
+    {
+      "decile": 6,
+      "customers": 2000,
+      "churn_rate": 0.481,
+      "lift_vs_avg": 0.9705,
+      "cum_recall": 0.7346
+    },
+    {
+      "decile": 7,
+      "customers": 2000,
+      "churn_rate": 0.4315,
+      "lift_vs_avg": 0.8707,
+      "cum_recall": 0.8216
+    },
+    {
+      "decile": 8,
+      "customers": 2000,
+      "churn_rate": 0.375,
+      "lift_vs_avg": 0.7567,
+      "cum_recall": 0.8973
+    },
+    {
+      "decile": 9,
+      "customers": 2000,
+      "churn_rate": 0.31,
+      "lift_vs_avg": 0.6255,
+      "cum_recall": 0.9598
+    },
+    {
+      "decile": 10,
+      "customers": 2000,
+      "churn_rate": 0.199,
+      "lift_vs_avg": 0.4015,
+      "cum_recall": 1.0
+    }
+  ],
+  "subgroups": {
+    "auc_by_tenure": {
+      "13-24 months": 0.649957055389075,
+      "<=12 months": 0.748914992284086,
+      ">24 months": 0.6816732706526935
+    },
+    "auc_by_area_min": 0.6401903571707525,
+    "auc_by_area_max": 0.7337368797196415
+  },
+  "finance": {
+    "assumptions": {
+      "base_rate": 0.0099,
+      "margin": 0.4,
+      "months": 12,
+      "contact_cost": 0.75,
+      "accept_rate": 0.15,
+      "incentive": 20.0,
+      "fixed_cost_per_year": 60000.0,
+      "book": 100000
+    },
+    "unit_economics": {
+      "top5": {
+        "churn_prob": 0.052418006998349455,
+        "avg_monthly_rev": 46.639917500046,
+        "value_per_save": 223.87160400022083,
+        "would_be_churners": 262.0900349917473,
+        "breakeven_nudge": 0.06391190285025021,
+        "breakeven_incentive": 0.31955951425125106
+      },
+      "top10": {
+        "churn_prob": 0.04012563796496381,
+        "avg_monthly_rev": 52.475757500043,
+        "value_per_save": 251.88363600020642,
+        "would_be_churners": 401.25637964963806,
+        "breakeven_nudge": 0.07420605760984356,
+        "breakeven_incentive": 0.3710302880492178
+      },
+      "top20": {
+        "churn_prob": 0.030419210460756237,
+        "avg_monthly_rev": 55.2735675000215,
+        "value_per_save": 265.31312400010324,
+        "would_be_churners": 608.3842092151248,
+        "breakeven_nudge": 0.09292971225314779,
+        "breakeven_incentive": 0.46464856126573895
+      }
+    },
+    "scenarios": {
+      "top5_conservative": {
+        "gross_benefit": 6930.755845859436,
+        "variable_cost": 60000.0,
+        "fixed_cost": 60000.0,
+        "net_benefit": -113069.24415414056,
+        "roi_pct": -94.22437012845046,
+        "saved_per_year": 82.55631915220597,
+        "save_rate": 0.03
+      },
+      "top5_base": {
+        "gross_benefit": 42245.65189877506,
+        "variable_cost": 45000.0,
+        "fixed_cost": 60000.0,
+        "net_benefit": -62754.34810122494,
+        "roi_pct": -59.766045810690414,
+        "saved_per_year": 188.70482519405806,
+        "save_rate": 0.06
+      },
+      "top5_upside": {
+        "gross_benefit": 92202.86093285575,
+        "variable_cost": 30000.0,
+        "fixed_cost": 60000.0,
+        "net_benefit": 2202.8609328557504,
+        "roi_pct": 2.4476232587286115,
+        "breakeven_book_size": 96458.58582737278,
+        "saved_per_year": 329.4847914084354,
+        "save_rate": 0.1
+      },
+      "top10_conservative": {
+        "gross_benefit": 11918.73003440359,
+        "variable_cost": 120000.0,
+        "fixed_cost": 60000.0,
+        "net_benefit": -168081.2699655964,
+        "roi_pct": -93.37848331422023,
+        "saved_per_year": 126.18239357048532,
+        "save_rate": 0.03
+      },
+      "top10_base": {
+        "gross_benefit": 72770.33942958964,
+        "variable_cost": 90000.0,
+        "fixed_cost": 60000.0,
+        "net_benefit": -77229.66057041036,
+        "roi_pct": -51.48644038027357,
+        "saved_per_year": 288.9045933477394,
+        "save_rate": 0.06
+      },
+      "top10_upside": {
+        "gross_benefit": 158924.8929054265,
+        "variable_cost": 60000.0,
+        "fixed_cost": 60000.0,
+        "net_benefit": 38924.8929054265,
+        "roi_pct": 32.437410754522084,
+        "breakeven_book_size": 60652.07475873721,
+        "saved_per_year": 504.75654688515385,
+        "save_rate": 0.1
+      }
+    },
+    "pilot_sizing": {
+      "top5": {
+        "n_10": 27033,
+        "n_20": 6420,
+        "n_30": 2702
+      },
+      "top10": {
+        "n_10": 35748,
+        "n_20": 8484,
+        "n_30": 3568
+      },
+      "top20": {
+        "n_10": 47607,
+        "n_20": 11293,
+        "n_30": 4747
+      }
+    }
+  }
+}
