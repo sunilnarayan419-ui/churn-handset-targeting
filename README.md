@@ -1,4 +1,28 @@
-# churn-handset-targeting
+# 📡 Churn Handset Targeting
+
+<p align="center">
+  <strong>A measurement-first telecom retention pilot — from churn modelling to a business decision.</strong>
+</p>
+
+<p align="center">
+  <a href="https://github.com/sunilnarayan419-ui/churn-handset-targeting/actions/workflows/ci.yml"><img src="https://github.com/sunilnarayan419-ui/churn-handset-targeting/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/sunilnarayan419-ui/churn-handset-targeting/actions/workflows/docs.yml"><img src="https://github.com/sunilnarayan419-ui/churn-handset-targeting/actions/workflows/docs.yml/badge.svg" alt="Manuscript documentation build"></a>
+  <a href="https://github.com/sunilnarayan419-ui/churn-handset-targeting"><img src="https://img.shields.io/github/stars/sunilnarayan419-ui/churn-handset-targeting?style=flat&logo=github" alt="GitHub stars"></a>
+  <a href="https://github.com/sunilnarayan419-ui/churn-handset-targeting/network/members"><img src="https://img.shields.io/github/forks/sunilnarayan419-ui/churn-handset-targeting?style=flat&logo=github" alt="GitHub forks"></a>
+  <a href="https://github.com/sunilnarayan419-ui/churn-handset-targeting/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License"></a>
+  <img src="https://img.shields.io/badge/Python-3.10--3.12-3776AB?logo=python&logoColor=white" alt="Python 3.10 to 3.12">
+  <img src="https://img.shields.io/badge/API-FastAPI-009688?logo=fastapi&logoColor=white" alt="FastAPI">
+  <img src="https://img.shields.io/badge/ML-scikit--learn-F7931E?logo=scikitlearn&logoColor=white" alt="scikit-learn">
+  <img src="https://img.shields.io/badge/Docs-Manubot-5B4B8A" alt="Manubot manuscript">
+</p>
+
+**A measurement-first telecom retention pilot:** churn-risk ranking, probability calibration and base-rate adjustment, transparent break-even economics, randomised-pilot sizing, a FastAPI service, optional Neo4j cohort analytics, and a reproducible Manubot research manuscript.
+
+Built from the GCI World 2026 final assignment. The operator and its customers are anonymised as **Company A**. Author: **Sunil Mandloi**.
+
+> **Decision in one sentence:** use the model to design a capped, randomised retention experiment—not to justify an immediate rollout. Predictive association does not establish that contacting a customer will prevent churn.
+
+---
 
 **A measurement-first telecom retention pilot:** churn-risk ranking, probability calibration and base-rate adjustment, transparent break-even economics, randomised-pilot sizing, a FastAPI service, optional Neo4j cohort analytics, and a reproducible Manubot research manuscript.
 
