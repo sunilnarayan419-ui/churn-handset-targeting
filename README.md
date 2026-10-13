@@ -16,13 +16,6 @@
   <img src="https://img.shields.io/badge/Docs-Manubot-5B4B8A" alt="Manubot manuscript">
 </p>
 
-**A measurement-first telecom retention pilot:** churn-risk ranking, probability calibration and base-rate adjustment, transparent break-even economics, randomised-pilot sizing, a FastAPI service, optional Neo4j cohort analytics, and a reproducible Manubot research manuscript.
-
-Built from the GCI World 2026 final assignment. The operator and its customers are anonymised as **Company A**. Author: **Sunil Mandloi**.
-
-> **Decision in one sentence:** use the model to design a capped, randomised retention experiment—not to justify an immediate rollout. Predictive association does not establish that contacting a customer will prevent churn.
-
----
 
 **A measurement-first telecom retention pilot:** churn-risk ranking, probability calibration and base-rate adjustment, transparent break-even economics, randomised-pilot sizing, a FastAPI service, optional Neo4j cohort analytics, and a reproducible Manubot research manuscript.
 
