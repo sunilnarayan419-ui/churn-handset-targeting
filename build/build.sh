@@ -12,18 +12,19 @@ manubot process \
   --output-directory=output \
   --cache-directory=ci/cache \
   --template-variables-path=results=build/variables.json \
+  --skip-citations \
   --log-level=INFO
 
-# Manubot writes output/manuscript.md and output/references.json (citations become hashed ids).
+# Manubot writes output/manuscript.md; the Pandoc filter resolves citations and writes references.
 cp -r content/images output/images
 pandoc output/manuscript.md \
   --from=markdown+smart --to=html5 --standalone --embed-resources --resource-path=output \
-  --citeproc --bibliography=output/references.json \
+  --filter=pandoc-manubot-cite --citeproc \
   --mathml --toc --number-sections \
   --metadata-file=content/metadata.yaml --css=build/manuscript.css \
   --output=output/index.html
 pandoc output/manuscript.md \
   --from=markdown+smart --to=docx --resource-path=output \
-  --citeproc --bibliography=output/references.json \
+  --filter=pandoc-manubot-cite --citeproc \
   --metadata-file=content/metadata.yaml --output=output/manuscript.docx
 echo "built output/index.html and output/manuscript.docx"
