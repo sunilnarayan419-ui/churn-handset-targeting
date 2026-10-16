@@ -34,6 +34,7 @@ markers = ["integration: needs a running Neo4j (set NEO4J_URI, NEO4J_USER, NEO4J
 line-length = 100
 target-version = "py310"
 src = ["src", "tests"]
+extend-exclude = ["notebooks/*.ipynb"]
 
 [tool.ruff.lint]
 select = ["E", "F", "B"]

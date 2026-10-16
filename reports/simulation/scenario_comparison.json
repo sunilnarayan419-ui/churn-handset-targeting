@@ -1,0 +1,91 @@
+{
+  "report_type": "exploratory_retention_scenario_comparison",
+  "scenario_count": 3,
+  "scenarios": [
+    {
+      "scenario_id": "retention-baseline-v1",
+      "scenario_name": "No intervention",
+      "intervention_type": "none",
+      "scenario_sha256": "eb1b636fa25338ef6f790ca8e9f12535fd5967b3ec695146408a4a3b103a1eb3",
+      "assumptions": {
+        "currency": "USD",
+        "assumed_incremental_save_rate": 0.0,
+        "value_per_incremental_save": 30.0,
+        "evidence_type": "explicit_assumptions"
+      },
+      "economics": {
+        "cost_per_target": 0.0,
+        "assumed_incremental_save_rate": 0.0,
+        "value_per_incremental_save": 30.0,
+        "expected_value_per_target": 0.0,
+        "expected_net_value_per_target": 0.0,
+        "break_even_save_rate": 0.0,
+        "assumptions_only": true
+      },
+      "simulation": null,
+      "evidence_boundaries": [
+        "Economic results are conditional on the supplied assumptions.",
+        "Assumed incremental save rates are not measured treatment effects.",
+        "Simulation-generated findings are not observed customer behavior.",
+        "Causal campaign effectiveness requires controlled real-world evaluation."
+      ]
+    },
+    {
+      "scenario_id": "personalized-nudge-v1",
+      "scenario_name": "Personalized retention nudge",
+      "intervention_type": "personalized_nudge",
+      "scenario_sha256": "9fc2f9db47ba4a9645339843aafac06fe96698ec9287f70c5f9eef07701d748f",
+      "assumptions": {
+        "currency": "USD",
+        "assumed_incremental_save_rate": 0.05,
+        "value_per_incremental_save": 30.0,
+        "evidence_type": "explicit_assumptions"
+      },
+      "economics": {
+        "cost_per_target": 0.75,
+        "assumed_incremental_save_rate": 0.05,
+        "value_per_incremental_save": 30.0,
+        "expected_value_per_target": 1.5,
+        "expected_net_value_per_target": 0.75,
+        "break_even_save_rate": 0.025,
+        "assumptions_only": true
+      },
+      "simulation": null,
+      "evidence_boundaries": [
+        "Economic results are conditional on the supplied assumptions.",
+        "Assumed incremental save rates are not measured treatment effects.",
+        "Simulation-generated findings are not observed customer behavior.",
+        "Causal campaign effectiveness requires controlled real-world evaluation."
+      ]
+    },
+    {
+      "scenario_id": "retention-credit-v1",
+      "scenario_name": "Retention credit",
+      "intervention_type": "retention_credit",
+      "scenario_sha256": "c4030ea49abe0bb30623ec1e5265a5d0ba0e2d8c8f3e0202ce98cc05ab7f7ac7",
+      "assumptions": {
+        "currency": "USD",
+        "assumed_incremental_save_rate": 0.15,
+        "value_per_incremental_save": 30.0,
+        "evidence_type": "explicit_assumptions"
+      },
+      "economics": {
+        "cost_per_target": 20.0,
+        "assumed_incremental_save_rate": 0.15,
+        "value_per_incremental_save": 30.0,
+        "expected_value_per_target": 4.5,
+        "expected_net_value_per_target": -15.5,
+        "break_even_save_rate": 0.6666666666666666,
+        "assumptions_only": true
+      },
+      "simulation": null,
+      "evidence_boundaries": [
+        "Economic results are conditional on the supplied assumptions.",
+        "Assumed incremental save rates are not measured treatment effects.",
+        "Simulation-generated findings are not observed customer behavior.",
+        "Causal campaign effectiveness requires controlled real-world evaluation."
+      ]
+    }
+  ],
+  "interpretation": "Compare conditional economic calculations and qualitative simulation findings. Do not interpret the ordering as proof of causal retention effectiveness."
+}

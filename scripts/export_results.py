@@ -17,7 +17,6 @@ from sklearn.metrics import roc_auc_score
 
 from churn_targeting import bands
 from churn_targeting.calibration import to_real_world
-from churn_targeting.config import DEFAULT_BASE_RATE
 from churn_targeting.data import load_customers
 from churn_targeting.finance import Assumptions, annualize, economics
 from churn_targeting.modeling import train
@@ -81,7 +80,6 @@ def main() -> None:
     boot = [roc_auc_score(y_test[i], raw[i]) for i in (rng.integers(0, len(y_test), len(y_test)) for _ in range(300))]
     out["model"]["auc_ci"] = [float(np.percentile(boot, 2.5)), float(np.percentile(boot, 97.5))]
 
-    base = DEFAULT_BASE_RATE
     out["targeting"] = {f"top{int(f * 100)}": top_fraction_stats(y_test, raw, f, 0.01) for f in (0.05, 0.10, 0.20)}
     out["targeting"]["rule_301_400"] = mask_stats(y_test, bands.past_300_days(X_test.eqpdays).values, 0.01)
     out["deciles"] = decile_table(y_test, raw).round(4).reset_index().to_dict("records")

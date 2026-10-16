@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" width="1200" height="360" role="img" aria-label="Churn Handset Targeting banner">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="0.55" stop-color="#1e1b4b"/>
+      <stop offset="1" stop-color="#0c4a6e"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#38bdf8" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#a78bfa" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="360" rx="22" fill="url(#bg)"/>
+
+  <!-- faint grid -->
+  <g stroke="#ffffff" stroke-opacity="0.05">
+    <path d="M0 60H1200M0 120H1200M0 180H1200M0 240H1200M0 300H1200"/>
+    <path d="M100 0V360M200 0V360M300 0V360M400 0V360M500 0V360M600 0V360M700 0V360M800 0V360M900 0V360M1000 0V360M1100 0V360"/>
+  </g>
+
+  <!-- Left: title -->
+  <text x="60" y="128" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="22" fill="#7dd3fc" letter-spacing="4">TELECOM RETENTION PILOT</text>
+  <text x="60" y="190" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="54" font-weight="700" fill="#ffffff">Churn Handset</text>
+  <text x="60" y="250" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="54" font-weight="700" fill="url(#accent)">Targeting</text>
+  <text x="60" y="298" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="20" fill="#cbd5e1">Rank risk · calibrate · price the break-even · randomise before you roll out</text>
+
+  <!-- Right: stylised phone + lift curve -->
+  <g transform="translate(830,50)">
+    <!-- phone -->
+    <rect x="0" y="0" width="110" height="220" rx="18" fill="#0b1220" stroke="url(#accent)" stroke-width="3"/>
+    <rect x="9" y="24" width="92" height="172" rx="6" fill="#111c33"/>
+    <circle cx="55" cy="208" r="6" fill="#334155"/>
+    <rect x="42" y="9" width="26" height="5" rx="2.5" fill="#334155"/>
+    <!-- risk bars on screen -->
+    <rect x="18" y="150" width="14" height="36" rx="3" fill="url(#bar)"/>
+    <rect x="38" y="125" width="14" height="61" rx="3" fill="url(#bar)"/>
+    <rect x="58" y="95" width="14" height="91" rx="3" fill="url(#bar)"/>
+    <rect x="78" y="55" width="14" height="131" rx="3" fill="url(#bar)"/>
+    <text x="55" y="46" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#94a3b8">eqpdays → risk</text>
+
+    <!-- ROC-like curve -->
+    <g transform="translate(150,10)">
+      <rect x="0" y="0" width="200" height="200" rx="12" fill="#0b1220" fill-opacity="0.8" stroke="#334155"/>
+      <path d="M20 180 L180 20" stroke="#475569" stroke-dasharray="5 5"/>
+      <path d="M20 180 C 50 120, 80 70, 180 20" stroke="url(#accent)" stroke-width="4" fill="none"/>
+      <text x="100" y="196" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#94a3b8">ROC-AUC 0.693</text>
+    </g>
+
+    <!-- decision chip -->
+    <g transform="translate(150,235)">
+      <rect width="200" height="44" rx="22" fill="#14532d" stroke="#4ade80"/>
+      <text x="100" y="28" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="600" fill="#bbf7d0">Capped randomised pilot</text>
+    </g>
+  </g>
+</svg>
