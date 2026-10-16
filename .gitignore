@@ -17,3 +17,7 @@ __pycache__/
 .coverage
 coverage.xml
 .ipynb_checkpoints/
+
+# Local environments and temporary integration backups
+.venv312/
+src/churn_targeting/*.bak.mirofish-*

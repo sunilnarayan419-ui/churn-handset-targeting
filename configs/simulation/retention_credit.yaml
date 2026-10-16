@@ -1,0 +1,19 @@
+
+
+scenario_id: retention-credit-v1
+name: Retention credit
+objective: >
+  Explore the economics of a hypothetical retention credit.
+intervention_type: retention_credit
+cost_per_target: 20.0
+target_population: 1000
+
+assumptions:
+  currency: USD
+  assumed_incremental_save_rate: 0.15
+  value_per_incremental_save: 30.0
+  evidence_type: illustrative_assumptions
+
+questions:
+  - Which customer objections should be investigated?
+  - What incremental save rate would justify the credit?
