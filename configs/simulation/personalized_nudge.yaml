@@ -1,0 +1,18 @@
+
+scenario_id: personalized-nudge-v1
+name: Personalized retention nudge
+objective: >
+  Explore the economics of a hypothetical low-cost retention message.
+intervention_type: personalized_nudge
+cost_per_target: 0.75
+target_population: 1000
+
+assumptions:
+  currency: USD
+  assumed_incremental_save_rate: 0.05
+  value_per_incremental_save: 30.0
+  evidence_type: illustrative_assumptions
+
+questions:
+  - Which customer objections should be investigated?
+  - What incremental save rate would justify the intervention?
