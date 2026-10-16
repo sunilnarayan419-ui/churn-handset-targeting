@@ -1,0 +1,40 @@
+{
+  "created_at_utc": "2026-10-16T02:08:05.836822+00:00",
+  "python_version": "3.12.10",
+  "model_version": "not-used",
+  "simulator_version": "not-connected",
+  "execution_mode": "assumption_only_no_simulator",
+  "scenario_count": 3,
+  "scenario_runs": [
+    {
+      "run_id": "assumption-run-001",
+      "scenario_id": "retention-baseline-v1",
+      "scenario_sha256": "eb1b636fa25338ef6f790ca8e9f12535fd5967b3ec695146408a4a3b103a1eb3",
+      "created_at_utc": "2026-10-16T02:08:05.836822+00:00",
+      "model_version": "not-used",
+      "simulator_version": "not-connected"
+    },
+    {
+      "run_id": "assumption-run-002",
+      "scenario_id": "personalized-nudge-v1",
+      "scenario_sha256": "9fc2f9db47ba4a9645339843aafac06fe96698ec9287f70c5f9eef07701d748f",
+      "created_at_utc": "2026-10-16T02:08:05.836822+00:00",
+      "model_version": "not-used",
+      "simulator_version": "not-connected"
+    },
+    {
+      "run_id": "assumption-run-003",
+      "scenario_id": "retention-credit-v1",
+      "scenario_sha256": "c4030ea49abe0bb30623ec1e5265a5d0ba0e2d8c8f3e0202ce98cc05ab7f7ac7",
+      "created_at_utc": "2026-10-16T02:08:05.836822+00:00",
+      "model_version": "not-used",
+      "simulator_version": "not-connected"
+    }
+  ],
+  "comparison_sha256": "2d309e3935a3d9bf854fd1e6c59193ceafd46c5e891c30e8715c98432406c4ab",
+  "limitations": [
+    "No MiroFish simulation was executed.",
+    "Economic outputs depend on explicitly supplied assumptions.",
+    "Assumed save rates are not measured causal effects."
+  ]
+}
