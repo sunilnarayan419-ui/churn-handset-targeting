@@ -1,60 +1,55 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" width="1200" height="360" role="img" aria-label="Churn Handset Targeting banner">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0f172a"/>
-      <stop offset="0.55" stop-color="#1e1b4b"/>
-      <stop offset="1" stop-color="#0c4a6e"/>
-    </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#38bdf8"/>
-      <stop offset="1" stop-color="#a78bfa"/>
-    </linearGradient>
-    <linearGradient id="bar" x1="0" y1="1" x2="0" y2="0">
-      <stop offset="0" stop-color="#38bdf8" stop-opacity="0.35"/>
-      <stop offset="1" stop-color="#a78bfa" stop-opacity="0.9"/>
-    </linearGradient>
-  </defs>
-
-  <rect width="1200" height="360" rx="22" fill="url(#bg)"/>
-
-  <!-- faint grid -->
-  <g stroke="#ffffff" stroke-opacity="0.05">
-    <path d="M0 60H1200M0 120H1200M0 180H1200M0 240H1200M0 300H1200"/>
-    <path d="M100 0V360M200 0V360M300 0V360M400 0V360M500 0V360M600 0V360M700 0V360M800 0V360M900 0V360M1000 0V360M1100 0V360"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 320" width="1280" height="320" role="img" aria-labelledby="t d">
+  <title id="t">Churn Handset Targeting</title>
+  <desc id="d">Project banner: handset and customer-graph mark, project title and a one-line description.</desc>
+  <rect width="1280" height="320" rx="20" fill="#0B1F33"/>
+  <g stroke="#2BC4D6" stroke-width="1.5" opacity="0.3">
+    <line x1="960" y1="160" x2="1000" y2="78"/>
+    <line x1="1000" y1="78" x2="1085" y2="128"/>
+    <line x1="1085" y1="128" x2="1170" y2="70"/>
+    <line x1="1085" y1="128" x2="1020" y2="224"/>
+    <line x1="1020" y1="224" x2="1130" y2="214"/>
+    <line x1="1130" y1="214" x2="1236" y2="150"/>
+    <line x1="1170" y1="70" x2="1236" y2="150"/>
+    <line x1="1085" y1="128" x2="1130" y2="214"/>
+    <line x1="960" y1="160" x2="1020" y2="224"/>
   </g>
-
-  <!-- Left: title -->
-  <text x="60" y="128" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="22" fill="#7dd3fc" letter-spacing="4">TELECOM RETENTION PILOT</text>
-  <text x="60" y="190" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="54" font-weight="700" fill="#ffffff">Churn Handset</text>
-  <text x="60" y="250" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="54" font-weight="700" fill="url(#accent)">Targeting</text>
-  <text x="60" y="298" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="20" fill="#cbd5e1">Rank risk · calibrate · price the break-even · randomise before you roll out</text>
-
-  <!-- Right: stylised phone + lift curve -->
-  <g transform="translate(830,50)">
-    <!-- phone -->
-    <rect x="0" y="0" width="110" height="220" rx="18" fill="#0b1220" stroke="url(#accent)" stroke-width="3"/>
-    <rect x="9" y="24" width="92" height="172" rx="6" fill="#111c33"/>
-    <circle cx="55" cy="208" r="6" fill="#334155"/>
-    <rect x="42" y="9" width="26" height="5" rx="2.5" fill="#334155"/>
-    <!-- risk bars on screen -->
-    <rect x="18" y="150" width="14" height="36" rx="3" fill="url(#bar)"/>
-    <rect x="38" y="125" width="14" height="61" rx="3" fill="url(#bar)"/>
-    <rect x="58" y="95" width="14" height="91" rx="3" fill="url(#bar)"/>
-    <rect x="78" y="55" width="14" height="131" rx="3" fill="url(#bar)"/>
-    <text x="55" y="46" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#94a3b8">eqpdays → risk</text>
-
-    <!-- ROC-like curve -->
-    <g transform="translate(150,10)">
-      <rect x="0" y="0" width="200" height="200" rx="12" fill="#0b1220" fill-opacity="0.8" stroke="#334155"/>
-      <path d="M20 180 L180 20" stroke="#475569" stroke-dasharray="5 5"/>
-      <path d="M20 180 C 50 120, 80 70, 180 20" stroke="url(#accent)" stroke-width="4" fill="none"/>
-      <text x="100" y="196" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#94a3b8">ROC-AUC 0.693</text>
+  <g fill="#2BC4D6" opacity="0.8">
+    <circle cx="1000" cy="78" r="5"/>
+    <circle cx="1170" cy="70" r="5"/>
+    <circle cx="1020" cy="224" r="5"/>
+    <circle cx="1130" cy="214" r="5"/>
+    <circle cx="1236" cy="150" r="5"/>
+    <circle cx="960" cy="160" r="5"/>
+  </g>
+  <circle cx="1085" cy="128" r="9" fill="#FFB020"/>
+  <g transform="translate(60 64) scale(1.5)">
+  <g>
+    <rect x="18" y="14" width="58" height="100" rx="13" fill="none" stroke="#E8F3F7" stroke-width="6"/>
+    <path d="M40 25H54M40 103H54" stroke="#E8F3F7" stroke-width="4" stroke-linecap="round"/>
+    <g stroke="#2BC4D6" stroke-width="2.5" stroke-linecap="round">
+    <line x1="47" y1="64" x2="47" y2="43"/>
+    <line x1="47" y1="64" x2="67" y2="57.5"/>
+    <line x1="47" y1="64" x2="59.3" y2="81"/>
+    <line x1="47" y1="64" x2="34.7" y2="81"/>
+    <line x1="47" y1="64" x2="27" y2="57.5"/>
     </g>
-
-    <!-- decision chip -->
-    <g transform="translate(150,235)">
-      <rect width="200" height="44" rx="22" fill="#14532d" stroke="#4ade80"/>
-      <text x="100" y="28" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="600" fill="#bbf7d0">Capped randomised pilot</text>
+    <g fill="#2BC4D6">
+    <circle cx="47" cy="43" r="4"/>
+    <circle cx="67" cy="57.5" r="4"/>
+    <circle cx="59.3" cy="81" r="4"/>
+    <circle cx="34.7" cy="81" r="4"/>
+    <circle cx="27" cy="57.5" r="4"/>
     </g>
+    <circle cx="47" cy="64" r="7.5" fill="#FFB020"/>
+    <g fill="none" stroke="#2BC4D6" stroke-width="5" stroke-linecap="round">
+    <path d="M89.5 19A16 16 0 0 1 99 39.5"/>
+    <path d="M94.3 5.8A30 30 0 0 1 112.2 44.3" opacity="0.55"/>
+    </g>
+  </g>
+  </g>
+  <g font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif">
+    <text x="290" y="120" font-size="15" font-weight="600" letter-spacing="4" fill="#4FD1DE">TELECOM RETENTION ANALYTICS</text>
+    <text x="290" y="182" font-size="46" font-weight="700" fill="#FFFFFF">Churn Handset Targeting</text>
+    <text x="290" y="226" font-size="17" fill="#A9C1D1">Calibrated churn risk, break-even economics and randomised pilot design</text>
   </g>
 </svg>
