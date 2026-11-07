@@ -1,6 +1,7 @@
 # Changelog
 
 ## Unreleased
+- Added a Sphinx documentation site (Furo, MyST, autodoc, Mermaid) under `docs/` with Read the Docs configuration, a `sphinx-docs` dependency group, a new logo/icon/banner identity and a redesigned README. Existing Markdown guides were moved into the new section structure; no application code was changed.
 - Expanded the README with setup paths for Windows PowerShell and Unix-like shells, endpoint examples, testing gates, repository structure, data-safety policy and responsible-use limitations.
 - Added detailed repository/module mapping, API reference, training/evaluation guide, test guide and development/troubleshooting workflow.
 - Added PowerShell training preflight/artifact verification and live API smoke-test scripts.

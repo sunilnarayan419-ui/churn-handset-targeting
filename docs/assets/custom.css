@@ -1,0 +1,20 @@
+/* Minimal additions to Furo: readable tables and a quiet status label. */
+.status-implemented,
+.status-experimental,
+.status-proposed {
+  display: inline-block;
+  padding: 0 0.5em;
+  border-radius: 0.25em;
+  font-size: 0.85em;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.status-implemented { background: #d6f3e4; color: #0b5132; }
+.status-experimental { background: #fdebc8; color: #6b4300; }
+.status-proposed { background: #e3e8ef; color: #2b3a4d; }
+body[data-theme="dark"] .status-implemented { background: #12392a; color: #9be3bf; }
+body[data-theme="dark"] .status-experimental { background: #4a3510; color: #f6d28b; }
+body[data-theme="dark"] .status-proposed { background: #2a3442; color: #c4cfdd; }
+
+table.docutils td, table.docutils th { vertical-align: top; }
+img[src$="banner.svg"] { width: 100%; height: auto; }

@@ -21,3 +21,6 @@ coverage.xml
 # Local environments and temporary integration backups
 .venv312/
 src/churn_targeting/*.bak.mirofish-*
+
+# Sphinx build output
+docs/_build/

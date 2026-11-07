@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-labelledby="t">
+  <title id="t">Churn Handset Targeting icon</title>
+  <rect width="128" height="128" rx="28" fill="#0F2A43"/>
+  <g transform="translate(10 10) scale(0.84)">
+  <g>
+    <rect x="18" y="14" width="58" height="100" rx="13" fill="none" stroke="#E8F3F7" stroke-width="6"/>
+    <path d="M40 25H54M40 103H54" stroke="#E8F3F7" stroke-width="4" stroke-linecap="round"/>
+    <g stroke="#2BC4D6" stroke-width="2.5" stroke-linecap="round">
+    <line x1="47" y1="64" x2="47" y2="43"/>
+    <line x1="47" y1="64" x2="67" y2="57.5"/>
+    <line x1="47" y1="64" x2="59.3" y2="81"/>
+    <line x1="47" y1="64" x2="34.7" y2="81"/>
+    <line x1="47" y1="64" x2="27" y2="57.5"/>
+    </g>
+    <g fill="#2BC4D6">
+    <circle cx="47" cy="43" r="4"/>
+    <circle cx="67" cy="57.5" r="4"/>
+    <circle cx="59.3" cy="81" r="4"/>
+    <circle cx="34.7" cy="81" r="4"/>
+    <circle cx="27" cy="57.5" r="4"/>
+    </g>
+    <circle cx="47" cy="64" r="7.5" fill="#FFB020"/>
+    <g fill="none" stroke="#2BC4D6" stroke-width="5" stroke-linecap="round">
+    <path d="M89.5 19A16 16 0 0 1 99 39.5"/>
+    <path d="M94.3 5.8A30 30 0 0 1 112.2 44.3" opacity="0.55"/>
+    </g>
+  </g>
+  </g>
+</svg>
