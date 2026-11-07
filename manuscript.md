@@ -8,7 +8,7 @@ keywords:
 - probability calibration
 - randomised pilot
 lang: en-US
-date-meta: '2026-10-16'
+date-meta: '2026-11-07'
 author-meta:
 - SunilMandloi
 header-includes: |
@@ -22,11 +22,11 @@ header-includes: |
   <meta name="citation_title" content="Handset-age churn targeting: a measurement-first retention pilot for a telecom operator" />
   <meta property="og:title" content="Handset-age churn targeting: a measurement-first retention pilot for a telecom operator" />
   <meta property="twitter:title" content="Handset-age churn targeting: a measurement-first retention pilot for a telecom operator" />
-  <meta name="dc.date" content="2026-10-16" />
-  <meta name="citation_publication_date" content="2026-10-16" />
-  <meta property="article:published_time" content="2026-10-16" />
-  <meta name="dc.modified" content="2026-10-16T13:03:27+00:00" />
-  <meta property="article:modified_time" content="2026-10-16T13:03:27+00:00" />
+  <meta name="dc.date" content="2026-11-07" />
+  <meta name="citation_publication_date" content="2026-11-07" />
+  <meta property="article:published_time" content="2026-11-07" />
+  <meta name="dc.modified" content="2026-11-07T03:22:36+00:00" />
+  <meta property="article:modified_time" content="2026-11-07T03:22:36+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -40,9 +40,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://sunilnarayan419-ui.github.io/churn-handset-targeting/" />
   <meta name="citation_pdf_url" content="https://sunilnarayan419-ui.github.io/churn-handset-targeting/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://sunilnarayan419-ui.github.io/churn-handset-targeting/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://sunilnarayan419-ui.github.io/churn-handset-targeting/v/af185ca70507d89d2f308a1695a72360141d4a02/" />
-  <meta name="manubot_html_url_versioned" content="https://sunilnarayan419-ui.github.io/churn-handset-targeting/v/af185ca70507d89d2f308a1695a72360141d4a02/" />
-  <meta name="manubot_pdf_url_versioned" content="https://sunilnarayan419-ui.github.io/churn-handset-targeting/v/af185ca70507d89d2f308a1695a72360141d4a02/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://sunilnarayan419-ui.github.io/churn-handset-targeting/v/9264665e6252a1afb0966c5c033b043ab757fbde/" />
+  <meta name="manubot_html_url_versioned" content="https://sunilnarayan419-ui.github.io/churn-handset-targeting/v/9264665e6252a1afb0966c5c033b043ab757fbde/" />
+  <meta name="manubot_pdf_url_versioned" content="https://sunilnarayan419-ui.github.io/churn-handset-targeting/v/9264665e6252a1afb0966c5c033b043ab757fbde/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -61,7 +61,7 @@ manubot-clear-requests-cache: false
 
 **SunilMandloi**
 
-*Technical report. Built October 16, 2026.*
+*Technical report. Built November 7, 2026.*
 
 
 ## Abstract
