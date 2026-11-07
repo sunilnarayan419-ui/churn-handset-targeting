@@ -25,8 +25,8 @@ header-includes: |
   <meta name="dc.date" content="2026-11-07" />
   <meta name="citation_publication_date" content="2026-11-07" />
   <meta property="article:published_time" content="2026-11-07" />
-  <meta name="dc.modified" content="2026-11-07T03:24:03+00:00" />
-  <meta property="article:modified_time" content="2026-11-07T03:24:03+00:00" />
+  <meta name="dc.modified" content="2026-11-07T03:39:27+00:00" />
+  <meta property="article:modified_time" content="2026-11-07T03:39:27+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -40,9 +40,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://sunilnarayan419-ui.github.io/churn-handset-targeting/" />
   <meta name="citation_pdf_url" content="https://sunilnarayan419-ui.github.io/churn-handset-targeting/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://sunilnarayan419-ui.github.io/churn-handset-targeting/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://sunilnarayan419-ui.github.io/churn-handset-targeting/v/b449388ed66a8718d1d7fce6a93b99c35f023c66/" />
-  <meta name="manubot_html_url_versioned" content="https://sunilnarayan419-ui.github.io/churn-handset-targeting/v/b449388ed66a8718d1d7fce6a93b99c35f023c66/" />
-  <meta name="manubot_pdf_url_versioned" content="https://sunilnarayan419-ui.github.io/churn-handset-targeting/v/b449388ed66a8718d1d7fce6a93b99c35f023c66/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://sunilnarayan419-ui.github.io/churn-handset-targeting/v/3e2fcef2a648d5d937a531d93ac4b79354a1be83/" />
+  <meta name="manubot_html_url_versioned" content="https://sunilnarayan419-ui.github.io/churn-handset-targeting/v/3e2fcef2a648d5d937a531d93ac4b79354a1be83/" />
+  <meta name="manubot_pdf_url_versioned" content="https://sunilnarayan419-ui.github.io/churn-handset-targeting/v/3e2fcef2a648d5d937a531d93ac4b79354a1be83/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
