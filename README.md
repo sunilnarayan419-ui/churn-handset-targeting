@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <strong>A measurement-first telecom retention pilot — from churn modelling to a business decision.</strong>
+  <strong>Calibrated churn risk, break-even retention economics and randomised pilot design for a telecom operator.</strong>
 </p>
 
 <p align="center">
@@ -20,400 +20,286 @@
   <img src="https://img.shields.io/badge/ML-scikit--learn-F7931E?logo=scikitlearn&logoColor=white" alt="scikit-learn">
   <img src="https://img.shields.io/badge/Graph-Neo4j-008CC1?logo=neo4j&logoColor=white" alt="Neo4j">
   <img src="https://img.shields.io/badge/Container-Docker-2496ED?logo=docker&logoColor=white" alt="Docker">
-  <img src="https://img.shields.io/badge/Docs-Manubot-5B4B8A" alt="Manubot manuscript">
+  <img src="https://img.shields.io/badge/Docs-Sphinx%20%2B%20Furo-0B7A8A" alt="Sphinx and Furo documentation">
+  <img src="https://img.shields.io/badge/Manuscript-Manubot-5B4B8A" alt="Manubot manuscript">
   <img src="https://img.shields.io/badge/Lint-Ruff-D7FF64?logo=ruff&logoColor=black" alt="Ruff">
 </p>
 
 <p align="center">
-  <a href="#-what-is-this">What is this</a> ·
-  <a href="#-headline-findings">Findings</a> ·
-  <a href="#-how-it-works">How it works</a> ·
-  <a href="#-repository-structure">Structure</a> ·
-  <a href="#-quick-start">Quick start</a> ·
-  <a href="#-api-endpoints">API</a> ·
-  <a href="#-limitations-and-responsible-use">Limitations</a>
+  <a href="#overview">Overview</a> ·
+  <a href="#architecture">Architecture</a> ·
+  <a href="#installation">Installation</a> ·
+  <a href="#api-overview">API</a> ·
+  <a href="#documentation">Documentation</a> ·
+  <a href="#scientific-limitations">Limitations</a> ·
+  <a href="#citation">Citation</a>
 </p>
 
 ---
 
-## 🎯 What is this?
+## Overview
 
-A telecom operator (anonymised as **Company A**) wants to reduce customer churn by targeting customers whose **handsets are ageing**. This repository answers the question in the order a careful analyst would:
+A telecom operator (anonymised as **Company A**) wants to reduce churn by contacting customers whose handsets
+are ageing. This repository packages that analysis as tested software and a documentation set. It answers, in
+order: who is at risk, whether the probabilities can be used on a realistic base rate, what a retention contact
+must achieve to pay for itself, and how to measure whether it works.
 
-1. **Who is at risk?** Rank customers with a calibrated gradient-boosting model.
-2. **Is the ranking trustworthy on the real base rate?** Adjust probabilities from the enriched sample (~49.6% churn) to a realistic ~1% monthly rate.
-3. **What would an intervention have to achieve to pay for itself?** Compute transparent break-even save rates.
-4. **How do we find out whether it works?** Size a two-arm randomised pilot with a holdout and a stop rule.
-5. **How do we ship it responsibly?** Serve scoring, economics and pilot sizing through a FastAPI service, with an optional Neo4j cohort layer and a reproducible Manubot manuscript.
+> **Decision in one sentence:** use the model to design a capped, randomised retention experiment, not to
+> justify an immediate roll-out. Predictive association does not establish that contacting a customer
+> prevents churn.
 
-Built from the **GCI World 2026 final assignment**. Author: **Sunil Mandloi**.
+Built from the **GCI World 2026 final assignment**. The supplied customer data are not distributed.
 
-> **Decision in one sentence:** use the model to design a capped, randomised retention experiment — not to justify an immediate rollout. Predictive association does not establish that contacting a customer will prevent churn.
+## Problem statement
 
-<p align="center">
-  <img src="docs/assets/pipeline.svg" alt="Project pipeline: data, model, calibration, economics, randomised pilot, decision" width="100%">
-</p>
+Retention contact is cheap per customer but capacity-limited. The operator must choose whom to contact and
+know the save rate at which a campaign breaks even. The data are an enriched sample (about 49.6 % churn)
+while the business scenario assumes roughly 1 % monthly churn, so ranking quality, probability calibration and
+causal effectiveness are treated as three separate questions
+([problem statement](docs/getting-started/problem-statement.md)).
 
-## 📊 Headline findings
+## Scientific and engineering objectives
 
-These are the reported results reproduced by this repository from the supplied assignment data. They cannot be independently regenerated without the original files, which are intentionally not distributed.
+- Validate the data and prevent leakage: keys, one-to-one merge, fit-after-split, out-of-fold calibration.
+- Rank customers with a calibrated gradient-boosting model and report discrimination honestly.
+- Make economics transparent: every assumption is an explicit, labelled argument.
+- Size a two-arm randomised pilot, the only design that can estimate incremental retention.
+- Expose the logic through a typed API, a CLI and an optional cohort graph, with reproducible reporting.
 
-| Result | Reported finding | Interpretation |
-|---|---:|---|
-| Customers analysed | 100,000 | Enriched assignment sample; 97 model features after exclusions |
-| Handset-age association | 39.5% churn at `eqpdays <= 300`; 59.3% at `301–400` | Association in this sample, not a causal effect |
-| Model | `HistGradientBoostingClassifier` with Platt calibration | Scikit-learn pipeline; `Customer_ID` and `ethnic` excluded |
-| Test ROC-AUC | 0.693 (reported bootstrap 95% CI 0.687–0.701) | Moderate ranking discrimination; 0.500 is chance ranking |
-| Targeting | Top 5% reported as 5.3× as likely to churn as average under a 1% base-rate assumption | Base-rate adjustment is an assumption, not a measured Company A rate |
-| Economics | $0.75 contact requires a reported 6.4% incremental save rate to break even; $20 credit requires 32% | Depends on margin, retention horizon, response and cost assumptions |
-| Recommendation | Capped randomised pilot with a stop rule | Estimate incremental impact with a holdout before scaling |
+## Key capabilities
 
-The training command prints its own test metrics. For intended use, limitations, calibration, subgroup results and monitoring, read the [model card](docs/MODEL_CARD.md). For provenance and handling, read the [data card](docs/DATA_CARD.md).
+| Capability | Status |
+|---|---|
+| Data validation, feature pipeline, training, Platt calibration, base-rate adjustment, scoring | Implemented |
+| Top-k targeting statistics, break-even economics, annualised scenarios, pilot sample size | Implemented |
+| FastAPI service with seven routes and optional `X-API-Key` | Implemented |
+| Neo4j cohort analytics (parity-tested against pandas) | Implemented, optional |
+| Assumption-based scenario comparison with provenance manifests | Implemented, experimental |
+| MiroFish agent-simulation adapter | Experimental, gated; no verified end-to-end run recorded |
+| Randomised retention pilot | Proposed; not run |
 
-## 🧠 How it works
-
-### System flow
+## Architecture
 
 ```mermaid
 flowchart LR
-    A[Client.csv + Record.csv] --> B[validate<br/>keys, 1:1 join, quality]
-    B --> C[Feature pipeline<br/>97 features]
-    C --> D[HistGradientBoosting]
-    D --> E[Platt calibration]
-    E --> F[Base-rate adjustment]
-    F --> G[Risk ranking / top-k targeting]
-    G --> H[Break-even economics]
-    H --> I[Randomised pilot sizing]
-    I --> J{Pilot result}
-    J -- incremental saves beat break-even --> K[Scale]
-    J -- otherwise --> L[Stop / redesign]
-    E --> M[(models/churn_model.joblib)]
-    M --> N[FastAPI service]
-    N --> O[/score, /score/batch/]
-    N --> P[/finance/economics/]
-    N --> Q[/pilot/size/]
+    C["Client.csv"] --> D
+    R["Record.csv"] --> D
+    D["data.py<br/>validated one-to-one merge"] --> M["features.py + modeling.py<br/>split, pipeline, Platt calibration"]
+    M --> B[("models/churn_model.joblib<br/>+ .json metadata")]
+    D --> A["analytics.py + bands.py<br/>pandas cohorts"]
+    D --> G["graph.py<br/>Neo4j loader and Cypher"]
+    B --> API["FastAPI service"]
+    G -.->|"when NEO4J_URI is set"| API
+    FIN["finance.py"] --> API
+    PIL["pilot.py"] --> API
+    M --> X["scripts/export_results.py"]
+    X --> RJ["reports/results.json"]
+    RJ --> MS["Manubot manuscript"]
+    SIM["simulation/ (experimental)"] --> CLI["command line only"]
 ```
 
-### Technical notes
+More diagrams: [system architecture](docs/architecture/system-architecture.md),
+[model pipeline](docs/architecture/model-pipeline.md), [data flow](docs/architecture/data-flow.md).
 
-**Model.** A scikit-learn pipeline around `HistGradientBoostingClassifier`, which handles missing values natively — which is why the API accepts sparse customer records (missing features are permitted and counted). `Customer_ID` and `ethnic` are excluded before fitting, leaving 97 model features.
-
-**Calibration.** Raw scores are Platt-calibrated, so the first probability returned by `/score` is on the *enriched-sample* scale (~49.6% churn).
-
-**Base-rate adjustment.** The deployment population is assumed to churn at roughly 1% per month, not ~50%. The second probability returned by `/score` is odds-adjusted to the requested base rate, i.e. the usual prior-shift correction:
-
-```text
-odds_adjusted = odds_calibrated × [ π_target / (1 − π_target) ] / [ π_sample / (1 − π_sample) ]
-```
-
-This is an assumption about the target population, not a measured Company A rate.
-
-**Break-even economics.** For `n` treated customers, churn probability `p`, incremental save rate `s`, monthly revenue `r`, margin `m`, retention horizon `T` months and contact cost `c`:
-
-```text
-net_variable_benefit = n · p · s · r · m · T  −  n · c
-break_even_save_rate = c / ( p · r · m · T )
-```
-
-Worked check (matches the API example below): `n=1000, p=0.05, s=0.10, r=50, m=0.40, T=12, c=0.50` → saves = 5, value per save = 240, benefit = 1,200, cost = 500, **net = 700**.
-
-**Pilot sizing.** `/pilot/size` returns the sample size for a two-arm randomised test given a baseline churn probability and a relative effect. Only a randomised holdout — not the model — can estimate incremental retention impact.
-
-**Cohort analytics.** The optional Neo4j layer supports cohort exploration, not better prediction: the supplied data contain no customer-to-customer relationships, and integration tests assert parity with pandas.
-
-## 🗂 Repository structure
-
-```text
-churn-handset-targeting/
-├── .github/
-│   └── workflows/            CI, Neo4j integration, Docker and manuscript workflows
-├── build/                    Manubot build script (build.sh) and manuscript.css — source files
-├── configs/
-│   └── simulation/           YAML retention scenarios (baseline, nudge, credit)
-├── content/                  Manuscript sections, metadata, references and figures
-├── data/                     Data instructions; raw assignment CSVs are NOT committed
-│   └── raw/                  Client.csv, Record.csv go here (git-ignored)
-├── docs/
-│   ├── assets/               README graphics (banner, pipeline)
-│   ├── ARCHITECTURE.md       Data flow
-│   ├── API_REFERENCE.md      Request/response contracts and status codes
-│   ├── DATA_CARD.md          Provenance and handling
-│   ├── MODEL_CARD.md         Intended use, calibration, subgroups, monitoring
-│   ├── GRAPH_MODEL.md        Neo4j cohort schema
-│   ├── REPOSITORY_GUIDE.md   Module and test responsibilities
-│   ├── DEVELOPMENT_WORKFLOW.md
-│   ├── TESTING.md            Test interpretation and pre-push checklist
-│   └── TRAINING_AND_EVALUATION.md
-├── models/                   Model-artifact directory; generated artifacts not committed
-├── notebooks/                Assignment analysis notebook and notes
-├── reports/                  Reported/generated results, notebook outputs, PDF/PPTX
-│   └── simulation/           Experiment manifests and scenario comparison reports
-├── scripts/                  Training/API helpers, report and manuscript utilities
-├── src/churn_targeting/
-│   ├── api/                  FastAPI app and Pydantic request/response schemas
-│   ├── simulation/           Scenario config, runner, evaluation, provenance, MiroFish adapter
-│   └── …                     Data, features, modeling, calibration, finance, analytics
-├── tests/                    Unit, synthetic-data, API, artifact, simulation and optional Neo4j tests
-├── .env.example              Safe environment-variable template
-├── CONTRIBUTING.md
-├── Dockerfile                Container image for the API
-├── docker-compose.yml        Optional Neo4j + API stack
-├── LICENSE                   MIT
-├── Makefile                  Common commands for Unix-like shells
-└── pyproject.toml            Package metadata, extras, CLI, pytest and Ruff configuration
-```
-
-See the [Repository guide](docs/REPOSITORY_GUIDE.md) for module/test responsibilities, [Architecture](docs/ARCHITECTURE.md) for data flow, and [Development workflow](docs/DEVELOPMENT_WORKFLOW.md) for common fixes.
-
-### Tech stack
+## Technology stack
 
 | Layer | Tooling |
 |---|---|
-| Modelling | Python 3.10–3.12, scikit-learn (`HistGradientBoostingClassifier`, Platt calibration), pandas |
-| Service | FastAPI, Pydantic schemas, optional `X-API-Key` auth |
-| Graph (optional) | Neo4j via Docker Compose |
-| Simulation (experimental) | YAML scenarios, MiroFish client/adapter |
-| Quality | pytest (+ coverage), Ruff, `pip check`, `compileall`, GitHub Actions CI |
-| Research output | Manubot manuscript, notebooks, PDF/PPTX reports |
-| Packaging | `pyproject.toml` extras: `api`, `graph`, `dev`, `docs`, `notebook` |
+| Modelling | Python 3.10-3.12, pandas, scikit-learn (`HistGradientBoostingClassifier`, Platt calibration) |
+| Service | FastAPI, Pydantic v2, Uvicorn |
+| Graph (optional) | Neo4j 5 and the Python driver |
+| Simulation (experimental) | YAML scenarios, MiroFish client and adapter |
+| Quality | pytest, Ruff, GitHub Actions, Docker |
+| Research output | Manubot manuscript, notebook, PDF/PPTX reports |
+| Documentation | Sphinx, Furo, MyST Parser, autodoc, Mermaid, MathJax; uv; Read the Docs configuration |
 
-## 🚀 Quick start
+## Machine-learning methodology
 
-### Windows PowerShell (VS Code)
+Stratified 80/20 split (seed 42); all encoding inside a scikit-learn pipeline fitted on training data;
+`HistGradientBoostingClassifier` with native missing-value handling; `Customer_ID` and `ethnic` excluded
+(97 features remain). Reported test ROC-AUC is 0.693 (95 % bootstrap interval 0.687-0.701), PR-AUC 0.681; top
+5 % by risk gives 5.3× lift **under an assumed 1 % base rate**. Details and caveats:
+[model development](docs/data-science/model-development.md), [evaluation](docs/data-science/evaluation.md),
+[model card](docs/scientific-reproducibility/model-card.md).
 
-Run from the repository root. Python 3.12 is recommended locally; CI tests Python 3.10–3.12.
+## Calibration and base-rate adjustment
 
-```powershell
-py -3.12 -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-python -m pip install -e ".[api,graph,dev,docs,notebook]"
+Platt scaling is fitted on out-of-fold training predictions. Probabilities are then shifted from the sample
+base rate $\pi_s$ to an assumed monthly rate $\pi$ (default 0.0099) through the odds:
 
-# Put authorised assignment files in data\raw\; never commit them.
-Test-Path .\data\raw\Client.csv
-Test-Path .\data\raw\Record.csv
-
-churn-targeting validate
-churn-targeting train
-churn-targeting serve
+```text
+logit(p_pi) = logit(p_cal) + ln(pi / (1 - pi)) - ln(pi_s / (1 - pi_s))
 ```
 
-If PowerShell blocks activation, run `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` in that terminal and activate again. If port 8000 is occupied, reuse the existing server or run `churn-targeting serve --port 8001`.
+The 1 % rate is an assumption, not a measured Company A rate
+([calibration](docs/data-science/calibration.md)).
 
-### macOS / Linux
+## Retention economics
+
+For `N` contacted customers with churn probability `p`, incremental save rate `s`, monthly revenue `r`, margin
+`m`, `T` months, contact cost `c`, acceptance `a` and incentive `I`:
+
+```text
+net_variable_benefit = N * p * s * r * m * T  -  N * (c + a * I)
+break_even_save_rate = (c + a * I) / (p * r * m * T)
+```
+
+Reported break-even for the top 5 % slice: 6.4 % for a $0.75 contact; 32 % when a $20 incentive accepted by
+15 % of contacts is added. The save rate is an input the model cannot estimate
+([retention economics](docs/business-methodology/retention-economics.md),
+[break-even analysis](docs/business-methodology/break-even-analysis.md)).
+
+## Randomised pilot design
+
+Two equal arms, two-sided test of proportions at level α with power 1-β; with `p1 = p0 (1 - r)`:
+
+```text
+n_per_arm = ceil( (z(1-α/2) * sqrt(2 p̄ (1-p̄)) + z(1-β) * sqrt(p0 (1-p0) + p1 (1-p1)))^2 / (p0 - p1)^2 )
+```
+
+The calculation is implemented; the pilot is not run ([pilot design](docs/business-methodology/pilot-design.md)).
+
+## API overview
+
+| Method and path | Purpose | Model required |
+|---|---|:-:|
+| `GET /health` | Liveness, model and graph status (always open) | no |
+| `GET /model` | Model metadata and test metrics | yes |
+| `POST /score` | Score one customer | yes |
+| `POST /score/batch` | Score 1-5,000 customers | yes |
+| `POST /finance/economics` | Wave economics and break-even save rate | no |
+| `POST /pilot/size` | Two-arm pilot sample size | no |
+| `GET /cohorts/{dimension}` | Churn by cohort segment (needs Neo4j or an injected frame) | no |
+
+If `API_KEY` is set, send `X-API-Key` on every route except `/health`. Interactive docs are at `/docs` while
+the service runs. Full contracts: [endpoints](docs/api/endpoints.md), [schemas](docs/api/schemas.md),
+[errors](docs/api/errors.md).
+
+## Installation
+
+Requires Python 3.10 or newer. Using [uv](https://docs.astral.sh/uv/):
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -e ".[api,graph,dev,docs,notebook]"
-
-# Put authorised Client.csv and Record.csv in data/raw/; never commit them.
-churn-targeting validate
-churn-targeting train
-churn-targeting serve
+uv venv --python 3.12
+source .venv/bin/activate            # Windows PowerShell: .\.venv\Scripts\Activate.ps1
+uv pip install -e ".[api,graph,dev,docs,notebook]"
 ```
 
-Open <http://127.0.0.1:8000/docs> for interactive API documentation.
+Extras (from `pyproject.toml`): `api`, `graph`, `notebook`, `dev`, and `docs` (the Manubot manuscript).
+The Sphinx site uses the separate `sphinx-docs` dependency group. `pip install -e ".[...]"` also works. See
+[installation](docs/getting-started/installation.md).
 
-### CLI commands
+## Environment configuration
 
-| Command | Purpose | Requires original data? |
-|---|---|---:|
-| `churn-targeting validate` | Checks files, keys, 1:1 join and data quality | Yes |
-| `churn-targeting train` | Fits, calibrates, evaluates and saves model bundle + metadata JSON | Yes |
-| `churn-targeting serve` | Starts FastAPI and loads `MODEL_PATH` at startup if present | No to start; yes for scoring |
-| `churn-targeting graph-load --reset` | Loads cohort attributes into Neo4j; `--reset` clears graph first | Yes, plus Neo4j |
-| `churn-targeting mirofish-preflight` | Read-only MiroFish project check | No, plus MiroFish |
-| `python scripts/export_results.py` | Recomputes analysis/manuscript results from source data | Yes |
-| `python scripts/check_manuscript.py` | Checks manuscript variables | `build/variables.json` required |
+Settings are read from environment variables (`.env` is **not** parsed automatically). Copy names from
+[`.env.example`](.env.example): `DATA_DIR`, `MODEL_PATH`, `BASE_RATE`, `API_KEY`, `NEO4J_URI`, `NEO4J_USER`,
+`NEO4J_PASSWORD`, `NEO4J_DATABASE`. Never commit `.env`
+([environment setup](docs/getting-started/environment-setup.md)).
 
-Training normally writes `models/churn_model.joblib` and `models/churn_model.json`. The `.joblib` file is pickle-based: **only load files you trained or trust.** Raw data and model artifacts are git-ignored by design. For a guided Windows run, execute the following from PowerShell after the environment is activated and the source files are present; details are in [Training and evaluation](docs/TRAINING_AND_EVALUATION.md).
-
-```powershell
-.\scripts\train_and_verify.ps1
-```
-
-### Docker
+## Quick start
 
 ```bash
-docker compose up -d neo4j     # optional graph database
-docker build -t churn-targeting .
+# Place authorised Client.csv and Record.csv in data/raw/ (never commit them)
+churn-targeting validate
+churn-targeting train
+churn-targeting serve                # http://127.0.0.1:8000/docs
 ```
 
-## 🔌 API endpoints
-
-| Method + path | Purpose | Model required? |
-|---|---|---:|
-| `GET /health` | Liveness plus model and graph status; always open | No |
-| `GET /model` | Model metadata and test metrics | Yes |
-| `POST /score` | Score one customer | Yes |
-| `POST /score/batch` | Score 1–5,000 customers | Yes |
-| `POST /finance/economics` | Wave economics and break-even save rate | No |
-| `POST /pilot/size` | Two-arm randomised pilot sample size | No |
-| `GET /cohorts/{dimension}` | Cohort analytics via Neo4j or injected pandas frame | Data/store required |
-
-If `API_KEY` is set, send it as `X-API-Key` to every endpoint except `/health`.
-
-### Score a customer (PowerShell)
-
-```powershell
-$body = @{
-  customer = @{
-    eqpdays = 350
-    months  = 14
-    area    = "NEW YORK CITY AREA"
-  }
-} | ConvertTo-Json -Depth 5
-
-Invoke-RestMethod -Method Post `
-  -Uri "http://127.0.0.1:8000/score" `
-  -ContentType "application/json" `
-  -Body $body
-```
-
-Missing features are permitted and counted; unknown columns are ignored. The calibrated probability is on the enriched sample scale; the second probability is odds-adjusted to the requested base rate. Sparse input may produce less reliable scores. See the [API reference](docs/API_REFERENCE.md) for request/response contracts and status codes.
-
-### Economics example
-
-```powershell
-$body = @{
-  n_treated       = 1000
-  churn_prob      = 0.05
-  avg_monthly_rev = 50
-  save_rate       = 0.10
-  margin          = 0.40
-  months          = 12
-  contact_cost    = 0.50
-} | ConvertTo-Json
-
-Invoke-RestMethod -Method Post `
-  -Uri "http://127.0.0.1:8000/finance/economics" `
-  -ContentType "application/json" `
-  -Body $body
-```
-
-With these inputs, `net_variable_benefit` should be approximately `700`. This checks arithmetic only; it does not validate business assumptions.
-
-### Pilot sizing example
-
-```powershell
-$body = @{ baseline_churn_prob = 0.10; relative_effect = 0.20 } | ConvertTo-Json
-
-Invoke-RestMethod -Method Post `
-  -Uri "http://127.0.0.1:8000/pilot/size" `
-  -ContentType "application/json" `
-  -Body $body
-```
-
-## 🧪 Simulation experiments and MiroFish integration
-
-The simulation layer adds a scenario-driven framework for comparing retention strategies, recording experiment provenance, evaluating outcomes and generating reports. It is an **experimental decision-support layer**; its scenario assumptions are illustrative and must not be presented as measured causal effects.
-
-### Retention scenarios
-
-The YAML scenarios are stored in `configs/simulation/`:
-
-| Scenario | Illustrative intervention cost per target | Assumed save rate | Assumed value per save | Population |
-|---|---:|---:|---:|---:|
-| `retention_baseline.yaml` | $0 | 0% | $30 | 1,000 |
-| `personalized_nudge.yaml` | $0.75 | 5% | $30 | 1,000 |
-| `retention_credit.yaml` | $20 | 15% | $30 | 1,000 |
-
-These values are configuration assumptions for comparing scenarios, not evidence that an intervention causes the specified save rate. Validate assumptions with a properly designed randomised pilot before making rollout or budget decisions.
-
-### Integration components
-
-| Module (`src/churn_targeting/simulation/`) | Responsibility |
+| Command | Purpose |
 |---|---|
-| `config.py` | Loads and validates scenario configuration |
-| `adapter.py` | Simulation adapter interface |
-| `mirofish_adapter.py` | Connects the experiment layer to MiroFish |
-| `mirofish_client.py` | MiroFish API client |
-| `mirofish_health.py` | MiroFish service health checks |
-| `runner.py` | Coordinates execution |
-| `experiment.py` | Experiment inputs and provenance |
-| `evaluation.py`, `provenance.py`, `reporting.py` | Evaluation, reproducibility metadata, scenario comparison reports |
-| `schemas.py` | Structured simulation data |
-| `cli.py`, `mirofish_cli.py` | Command-line interfaces |
+| `churn-targeting validate` | Check files, keys, one-to-one join and data quality |
+| `churn-targeting train [--search]` | Fit, calibrate, evaluate, save bundle and metadata JSON |
+| `churn-targeting serve [--port N]` | Start the FastAPI service |
+| `churn-targeting graph-load [--reset]` | Load cohorts into Neo4j |
+| `churn-targeting mirofish-preflight` / `mirofish-run` | Experimental, gated MiroFish commands |
 
-Related tests: `tests/test_simulation_*.py` and `tests/test_mirofish_*.py`.
+`POST /finance/economics` and `POST /pilot/size` work without data or a model. Model files are pickles: **load
+only bundles you trained**. See the [quickstart](docs/getting-started/quickstart.md).
 
-### MiroFish safety and preflight
+## Docker deployment
 
-The preflight command performs a **read-only** project-list check. It does not create a project, build a graph, call an LLM or start a simulation. From the repository root with the environment activated:
-
-```powershell
-churn-targeting mirofish-preflight --project-id "<MIROFISH_PROJECT_ID>" --base-url "http://localhost:5001"
+```bash
+docker build -t churn-targeting .
+docker compose up -d neo4j           # optional; needs NEO4J_PASSWORD in .env
 ```
 
-Review the returned project requirement and confirm that it matches the selected telecom retention scenario. The preflight keyword checks are heuristic and do not establish semantic compatibility; manually verify the project's source document, ontology and requirements. If the project is unrelated, unverified or incompatible, do not proceed.
+The image installs the `api` and `graph` extras and runs the API as a non-root user; mount a trained
+`models/` directory. See [Docker](docs/deployment/docker.md).
 
-The `mirofish-run` command requires explicit execution and scenario-match confirmation flags (`--allow-remote-execution` and `--confirm-project-requirement-matches-scenario`). These flags are safeguards, not proof that a project is appropriate. Do not run simulations against the existing fictional agricultural test project. Keep remote execution disabled until a dedicated, verified telecom/churn project and its data have been prepared and reviewed.
+## Repository structure
 
-### Reproducibility and reports
-
-Simulation outputs may include an experiment manifest and scenario comparison report under `reports/simulation/`. Review generated reports before sharing or committing them, and do not treat assumed save rates or simulated outcomes as validated real-world treatment effects. Keep secrets, raw customer data and local environment files out of version control.
-
-## ✅ Testing and quality gates
-
-The regular suite uses synthetic fixtures and does not need the original assignment CSVs.
-
-```powershell
-python -m pip check
-python -m ruff check .
-python -m compileall -q src tests
-python -m pytest -m "not integration" -v --cov=churn_targeting --cov-report=term-missing
+```text
+churn-handset-targeting/
+├── .github/workflows/     CI (lint, tests, Neo4j integration, Docker) and manuscript workflows
+├── .readthedocs.yaml      Read the Docs build (uv + Sphinx)
+├── build/                 Manubot build script and stylesheet
+├── configs/simulation/    YAML retention scenarios
+├── content/               Manubot manuscript sources and figures
+├── data/                  Data instructions; raw CSVs are not committed
+├── docs/                  Sphinx site: conf.py, index.rst, section folders, assets/ (logo, icon, banner)
+├── models/                Trained artefacts (not committed)
+├── notebooks/             Assignment analysis notebook
+├── reports/               Results, notebook outputs, deck, simulation reports
+├── scripts/               Results export, manuscript checks, PowerShell helpers
+├── src/churn_targeting/   Package: modelling, finance, pilot, analytics, graph, api/, simulation/
+├── tests/                 Unit, API, artefact, simulation and Neo4j integration tests
+├── Dockerfile, docker-compose.yml, Makefile, pyproject.toml
+└── CITATION.cff, CHANGELOG.md, CONTRIBUTING.md, LICENSE
 ```
 
-Neo4j integration tests require a running/configured database: `python -m pytest -m integration -v`.
+Guide: [repository guide](docs/development/repository-guide.md).
 
-After training and starting the API, run the live endpoint smoke test from a second PowerShell terminal:
+## Documentation
 
-```powershell
-.\scripts\smoke_test_api.ps1
+The documentation is a Sphinx site (Furo theme, MyST Markdown, autodoc, Mermaid) whose sources are in
+[`docs/`](docs/index.rst). **Hosted URL: pending.** The Read the Docs configuration is in
+[`.readthedocs.yaml`](.readthedocs.yaml) but no hosted site is confirmed. To build locally:
+
+```bash
+uv sync --extra api --group sphinx-docs
+uv run sphinx-build -b html docs docs/_build/html
 ```
 
-See the [Testing guide](docs/TESTING.md) for test interpretation and the pre-push checklist. Green synthetic tests do not prove the real-data pipeline, predictive performance, or production deployment are valid.
+Start with the [overview](docs/getting-started/overview.md).
 
-## 🕸 Optional Neo4j cohort layer
+## Scientific limitations
 
-Neo4j supports cohort exploration, not better prediction: the supplied data contain no customer-to-customer relationships, and integration tests assert parity with pandas.
+- Association, not causation: only a randomised pilot estimates incremental retention.
+- Enriched sample (49.6 % churn) versus an assumed ~1 % monthly rate; the base-rate shift is an assumption.
+- No timestamps, so no temporal validation and unverifiable column timing.
+- Moderate discrimination (ROC-AUC 0.693); subgroup AUC varies 0.64-0.75.
+- Excluding `ethnic` does not establish fairness; other fields may act as proxies.
+- Do not use scores for credit, eligibility, pricing discrimination or denial of service.
 
-1. Copy `.env.example` to `.env` and set a strong local `NEO4J_PASSWORD` (at least 8 characters for Compose).
-2. Start Neo4j with `docker compose up -d neo4j`.
-3. Export `NEO4J_URI`, `NEO4J_USER`, `NEO4J_PASSWORD`, and `NEO4J_DATABASE` into the CLI environment.
-4. Run `churn-targeting graph-load --reset` only if you intend to clear and reload the graph.
+Full list: [limitations](docs/scientific-reproducibility/limitations.md).
 
-The application reads environment variables; it does not automatically parse `.env` unless another tool loads it. Never commit `.env`. See [Graph model](docs/GRAPH_MODEL.md) and [Development workflow](docs/DEVELOPMENT_WORKFLOW.md).
+## Reproducibility and data availability
 
-## 📄 Manuscript and reports
+The data were supplied with a university assignment and are not redistributed. With the files in `data/raw/`,
+`python scripts/export_results.py` regenerates `reports/results.json`, from which the Manubot manuscript is
+built ([manuscript pipeline](docs/scientific-reproducibility/manuscript-pipeline.md)). The regular test suite
+uses synthetic fixtures and does not need the data; passing tests does not validate the real-data results.
 
-- `content/` contains the Manubot manuscript source, references, metadata and figures.
-- `build/build.sh` builds the manuscript; output is written under `output/`.
-- `python scripts/export_results.py --data-dir data/raw --out reports/results.json` recomputes analysis variables from raw data (typically 1–2 minutes on one CPU core).
-- `scripts/export_manuscript_variables.py` exports manuscript variables; `scripts/check_manuscript.py` fails if a manuscript variable is undefined.
-- `reports/` contains supplied report artefacts and analysis summaries; regenerate from raw data when available rather than treating reports as the source of truth.
+## Security considerations
 
-## 🔒 Git and data safety
+Optional constant-time API-key check; parameterised Cypher with whitelisted labels; non-root container. Gaps:
+the OpenAPI/docs routes are not key-protected, there is no TLS, rate limiting or key rotation, and model files
+are pickles. See [security](docs/deployment/security.md).
 
-Before committing, review every staged path. Commit source code, tests, documentation, manuscript source, configuration and reviewed report artefacts. Do **not** commit raw assignment files, customer extracts/scored lists, `.env`, API keys, database passwords, tokens, `.venv`, caches, generated build variables or unnecessary model binaries.
+## Contributing
 
-The `.gitignore` excludes raw data and model artifacts while preserving `data/README.md`, `data/raw/.gitkeep`, and `models/.gitkeep`. A `data/`, `models/` or `build/` entry in `git status` is not automatically a problem: inspect the actual files. `build/build.sh` and `build/manuscript.css` are source files and should remain versioned.
+See [CONTRIBUTING.md](CONTRIBUTING.md) and the [development workflow](docs/development/development-workflow.md).
+Never commit data, models, `.env` or scored customer lists.
 
-Code is MIT-licensed (see [LICENSE](LICENSE)); this does not grant rights to redistribute assignment data. See the [Data card](docs/DATA_CARD.md) and [Contributing](CONTRIBUTING.md).
+## Citation
 
-## ⚠️ Limitations and responsible use
+Cite via [CITATION.cff](CITATION.cff) (GitHub's "Cite this repository"). The manuscript is under `content/`.
 
-- The sample is enriched (approximately 49.6% churn), unlike the assumed roughly 1% monthly churn. Base-rate adjustment depends on the actual deployment population and outcome window.
-- No timestamps are available for time-based validation; the target describes churn 31–60 days after observation.
-- Model outputs are associations/risk rankings, not treatment effects. Only a properly randomised pilot estimates incremental retention impact.
-- Demographic and socioeconomic variables may act as proxies. Excluding `ethnic` does not establish fairness.
-- Do not use this model for credit, eligibility, pricing discrimination, denial of service, or other consequential individual decisions.
-- Before operational use, validate on representative current data, audit subgroup performance and calibration, document lawful basis/consent and opt-out handling, and set monitoring and rollback rules.
+## License
 
----
+MIT, see [LICENSE](LICENSE). The license does not grant rights to redistribute the assignment data.
 
-<p align="center">
-  Built by <strong>Sunil Mandloi</strong> · MIT licensed · If this helped, consider giving it a ⭐
-</p>
+## Author and acknowledgements
+
+Built by **Sunil Mandloi** for the GCI World 2026 final assignment. As stated in the manuscript, generative AI
+(ChatGPT and Claude) assisted with code, tests and drafting; the author is responsible for the content.
