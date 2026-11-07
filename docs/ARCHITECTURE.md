@@ -1,6 +1,6 @@
 # Architecture
 
-```mermaid
+```{mermaid}
 flowchart LR
     A[Client.csv + Record.csv<br/>data/raw, not committed] --> B[data.py<br/>validated 1:1 merge]
     B --> C[features.py + modeling.py<br/>split, pipeline, tune, calibrate]
